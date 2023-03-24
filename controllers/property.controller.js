@@ -46,7 +46,15 @@ const createProperty = async (req, res) => {
     console.log(error);
   }
 };
-const getAllProperites = () => {};
+
+const getAllProperites = async (req, res) => {
+  try {
+    const properties = await Property.find({}).limit(req.query._end);
+    res.status(200).json(properties);
+  } catch (error) {
+    res.status(500).json({ message: "Failed Loading Properties" });
+  }
+};
 const getPropertyDetails = () => {};
 const updateProperty = () => {};
 const deleteProperty = () => {};

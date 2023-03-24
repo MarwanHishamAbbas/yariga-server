@@ -8,8 +8,8 @@ import {
 } from "../controllers/property.controller.js";
 const router = express.Router();
 
-router.route("/").post(createProperty);
 router.route("/").get(getAllProperites);
+router.route("/").post(createProperty);
 router.route("/:id").get(getPropertyDetails);
 router.route("/:id").patch(updateProperty);
 router.route("/:id").delete(deleteProperty);
