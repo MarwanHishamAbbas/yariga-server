@@ -48,8 +48,16 @@ const createProperty = async (req, res) => {
 };
 
 const getAllProperites = async (req, res) => {
+  const { title_like = "" } = req.query;
+
+  const query = {};
+
+  if (title_like) {
+    query.title = { $regex: title_like, $options: "i" };
+  }
+
   try {
-    const properties = await Property.find({}).limit(req.query._end);
+    const properties = await Property.find(query).limit(req.query._end);
     res.status(200).json(properties);
   } catch (error) {
     res.status(500).json({ message: "Failed Loading Properties" });
